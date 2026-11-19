@@ -12,19 +12,8 @@ except (KeyError, FileNotFoundError):
 role = st.selectbox("Job Title", ["Machine Learning Engineer", "Senior Software Engineering", "Full Stack Engineer", "Backend Engineer", "Others"])
 if role == "Others":
     role = st.text_input("Enter your Job Title", "XXXXXX")
-model = st.selectbox(
-    "Choose Your Model",
-    [
-        "openai/gpt-oss-120b",
-        "openai/gpt-oss-20b"
-    ]
-)
-level = st.selectbox(
-    "Choose your level",
-    [
-        "Beginner", "Intermediate", "Advanced"
-    ]
-)
+model = st.selectbox("Choose Your Model",["openai/gpt-oss-120b","openai/gpt-oss-20b"])
+level = st.selectbox("Choose your level",["Beginner", "Intermediate", "Advanced"])
 mode = st.radio("Activity", ["Generate Question", "Generate Code Questions", "Evaluate Answers", "Improve Answer"])
 if mode == "Generate Question":
     count = st.slider("Number Of Questions", 1, 10, 5)
@@ -51,16 +40,8 @@ if st.button("Generate AI Response", type="primary"):
         try:
             response = client.chat.completions.create(
                 model=model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "Act as a senior Interviewer, both HR and Technical expert"
-                    },
-                    {
-                        "role": "user",
-                        "content": background + task
-                    }
-                ],
+                messages=[{"role": "system","content": "Act as a senior Interviewer, both HR and Technical expert"},
+                    {"role": "user","content": background + task}],
                 temperature=0.7,
                 max_tokens=1800
             )

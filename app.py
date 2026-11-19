@@ -67,12 +67,7 @@ if st.button("Generate AI Response", type="primary"):
             output = response.choices[0].message.content
             st.subheader("AI Response")
             st.markdown(output)
-            st.download_button(
-                "Download Response",
-                output,
-                file_name="Interview_Response.txt",
-                mime="text/plain"
-            )
+            st.download_button("Download Response",output,file_name="Interview_Response.txt",mime="text/plain" )
         except Exception as e:
             st.error(f"API connection was unsuccessful: {e}")
             st.info("Please check your API key and rate limits.")
